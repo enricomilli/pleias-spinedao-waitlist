@@ -27,14 +27,16 @@ export default function BackroomWaitlistEmail({ userFirstname }: EmailProps) {
       <Body style={main}>
         <Container style={container}>
           <Img
-            src={`https://spinedao.pleias.dev/spinedao.svg`}
+            src={`https://spinedao.pleias.dev/spinedao-hori.png`}
             width="220"
-            height="100"
+            height="auto"
             alt="SpineDAO Logo"
             style={{
               marginLeft: "auto",
               marginRight: "auto",
               paddingRight: 30,
+              marginTop: 20,
+              marginBottom: 30,
             }}
           />
 
