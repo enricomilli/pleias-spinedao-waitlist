@@ -4,23 +4,13 @@ import WelcomeTemplate from "../../../emails";
 
 import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
-import { Redis } from "@upstash/redis";
-import { Ratelimit } from "@upstash/ratelimit";
+import { RateLimiter } from "../../../lib/rate-limiter";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN,
-});
+const ratelimit = new RateLimiter(2, 60 * 1000); // 2 requests per minute
 
-const ratelimit = new Ratelimit({
-  redis,
-  // 2 requests per minute from the same IP address in a sliding window of 1 minute duration which means that the window slides forward every second and the rate limit is reset every minute for each IP address.
-  limiter: Ratelimit.slidingWindow(2, "1 m"),
-});
-
-export async function POST(request: NextRequest, response: NextResponse) {
+export async function POST(request: NextRequest) {
   const ip = request.ip ?? "127.0.0.1";
 
   const result = await ratelimit.limit(ip);
@@ -38,15 +28,19 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
   const { email, firstname } = await request.json();
 
-  const { data, error } = await resend.emails.send({
-    from: "Lakshay<hello@waitlist.lakshb.dev>",
-    to: [email],
-    subject: "Thankyou for wailisting the Next.js + Notion CMS template!",
-    reply_to: "lakshb.work@gmail.com",
-    html:  await render(WelcomeTemplate({ userFirstname: firstname })),
+  await resend.contacts.create({
+    audienceId: process.env.RESEND_AUDIENCE_ID!,
+    email: email,
+    firstName: firstname,
   });
 
-  // const { data, error } = { data: true, error: null }
+  const { data, error } = await resend.emails.send({
+    from: "SpineDAO <hello@waitlist.spinedao.com>",
+    to: [email],
+    subject: "Thank you for joining the R&D backroom",
+    reply_to: "people@spinedao.com",
+    html: await render(WelcomeTemplate({ userFirstname: firstname })),
+  });
 
   if (error) {
     return NextResponse.json(error);

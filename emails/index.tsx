@@ -14,17 +14,17 @@ interface EmailProps {
   userFirstname: string;
 }
 
-export const NotionWaitlistEmail = ({ userFirstname }: EmailProps) => (
+export const BackroomWaitlistEmail = ({ userFirstname }: EmailProps) => (
   <Html>
     <Head />
     <Preview>Thanks for Joining the Waitlist, {userFirstname}! 🎉</Preview>
     <Body style={main}>
       <Container style={container}>
         <Img
-          src={`https://nextjs-notion-waitlist.vercel.app/waitlist-logo.png`}
+          src={`https://spinedao.com`}
           width="220"
           height="100"
-          alt="Notion Waitlist Logo"
+          alt="SpineDAO Logo"
           style={logo}
         />
         <Text style={greeting}>Hi {userFirstname},</Text>
@@ -37,37 +37,31 @@ export const NotionWaitlistEmail = ({ userFirstname }: EmailProps) => (
           I'll keep you posted on the progress and notify you as soon as it's
           ready for you to use. In the meantime, if you have any questions or
           feedback, don't hesitate to reach out by replying directly to{" "}
-          <a href="mailto:lakshb.work@gmail.com" style={link}>
+          <a href="mailto:people@spinedao.com" style={link}>
             this email {""}
           </a>
           — I'm here to listen!
         </Text>
-        <Text style={paragraph}>
-          You can also follow me on X/Twitter for updates:{" "}
-          <a href="https://x.com/blakssh" style={link}>
-            @blakssh
-          </a>
-        </Text>
         <Text style={signOff}>
           Best regards,
           <br />
-          Lakshay
+          SpineDAO Team
         </Text>
         <Hr style={hr} />
         <Text style={footer}>
-          You received this email because you signed up for the Notion waitlist.
-          If you believe this is a mistake, feel free to ignore this email.
+          You received this email because you signed up for the SpineDAO R&D
+          Backroom.
         </Text>
       </Container>
     </Body>
   </Html>
 );
 
-NotionWaitlistEmail.PreviewProps = {
+BackroomWaitlistEmail.PreviewProps = {
   userFirstname: "Tyler",
 } as EmailProps;
 
-export default NotionWaitlistEmail;
+export default BackroomWaitlistEmail;
 
 const main = {
   background: "linear-gradient(-225deg, #FFE29F 0%, #FFA99F 48%, #FF719A 100%)",

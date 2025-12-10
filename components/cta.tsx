@@ -21,23 +21,23 @@ export default function CTA() {
       </motion.div>
 
       <motion.img
-        src="/logo.svg"
+        src="/spinedao.svg"
         alt="logo"
-        className="mx-auto h-24 w-24"
+        className="mx-auto mb-6 mt-3 h-auto w-60"
         variants={itemVariants}
       />
 
       <motion.div variants={itemVariants}>
         <TextBlur
           className="text-center text-3xl font-medium tracking-tighter sm:text-5xl"
-          text="A Simple Next.js Waitlist Template with Notion as CMS"
+          text="Join Our R&D Backroom"
         />
       </motion.div>
 
       <motion.div variants={itemVariants}>
         <TextBlur
           className="mx-auto max-w-[27rem] pt-1.5 text-center text-base text-zinc-300 sm:text-lg"
-          text="Join the waitlist to get early access of the product and recieve updates on the progress!"
+          text="Join the waitlist to get early access of the product and receive updates on the progress!"
           duration={0.8}
         />
       </motion.div>

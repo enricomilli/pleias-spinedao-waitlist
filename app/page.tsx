@@ -4,10 +4,8 @@ import { toast } from "sonner";
 import { useState } from "react";
 import CTA from "@/components/cta";
 import Form from "@/components/form";
-import Logos from "@/components/logos";
-import Particles from "@/components/ui/particles";
 import Header from "@/components/header";
-import Footer from "@/components/footer";
+import Particles from "@/components/ui/particles";
 
 export default function Home() {
   const [name, setName] = useState<string>("");
@@ -61,24 +59,7 @@ export default function Home() {
           return; // Exit the promise early if mail sending fails
         }
 
-        // If email sending is successful, proceed to insert into Notion
-        const notionResponse = await fetch("/api/notion", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name, email }),
-        });
-
-        if (!notionResponse.ok) {
-          if (notionResponse.status === 429) {
-            reject("Rate limited");
-          } else {
-            reject("Notion insertion failed");
-          }
-        } else {
-          resolve({ name });
-        }
+        resolve({ name });
       } catch (error) {
         reject(error);
       }
@@ -86,7 +67,7 @@ export default function Home() {
 
     toast.promise(promise, {
       loading: "Getting you on the waitlist... 🚀",
-      success: (data) => {
+      success: () => {
         setName("");
         setEmail("");
         return "Thank you for joining the waitlist 🎉";
@@ -123,19 +104,9 @@ export default function Home() {
           handleSubmit={handleSubmit}
           loading={loading}
         />
-
-        <Logos />
       </section>
 
-      <Footer />
-
-      <Particles
-        quantityDesktop={350}
-        quantityMobile={100}
-        ease={80}
-        color={"#F7FF9B"}
-        refresh
-      />
+      <Particles />
     </main>
   );
 }
