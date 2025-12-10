@@ -27,7 +27,7 @@ export default function BackroomWaitlistEmail({ userFirstname }: EmailProps) {
       <Body style={main}>
         <Container style={container}>
           <Img
-            src={`https://cdn.prod.website-files.com/67c18f24d3391af167d9fae7/67c1b4cebeaac11b2a9a8a96_Spinedao-Logo.svg`}
+            src={`https://spinedao.pleias.dev/spinedao.svg`}
             width="220"
             height="100"
             alt="SpineDAO Logo"
