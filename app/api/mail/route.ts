@@ -26,13 +26,15 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const { email, firstname } = await request.json();
+  const { email, firstname, company } = await request.json();
 
   const { data: contact, error: contactErr } = await resend.contacts.create({
     audienceId: process.env.RESEND_AUDIENCE_ID!,
     email: email,
     firstName: firstname,
+    lastName: company,
   });
+
   if (contactErr || !contact) {
     return NextResponse.json(contactErr || { message: "Failed to send email" });
   }

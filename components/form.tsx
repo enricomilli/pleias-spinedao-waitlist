@@ -8,6 +8,8 @@ import { containerVariants, itemVariants } from "@/lib/animation-variants";
 interface FormProps {
   name: string;
   email: string;
+  company: string;
+  handleCompanyChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleEmailChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: () => void;
@@ -17,6 +19,8 @@ interface FormProps {
 export default function Form({
   name,
   email,
+  company,
+  handleCompanyChange,
   handleNameChange,
   handleEmailChange,
   handleSubmit,
@@ -32,6 +36,7 @@ export default function Form({
         <Input
           type="text"
           placeholder="Your Name"
+          required
           value={name}
           onChange={handleNameChange}
         />
@@ -39,11 +44,21 @@ export default function Form({
       <motion.div variants={itemVariants}>
         <Input
           type="email"
+          required
           placeholder="Your Email Address"
           value={email}
           onChange={handleEmailChange}
         />
       </motion.div>
+      <motion.div variants={itemVariants}>
+        <Input
+          type="text"
+          placeholder="Your Company"
+          value={company}
+          onChange={handleCompanyChange}
+        />
+      </motion.div>
+
       <motion.div variants={itemVariants}>
         <EnhancedButton
           variant="expandIcon"

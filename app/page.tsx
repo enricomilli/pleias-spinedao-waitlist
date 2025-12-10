@@ -10,6 +10,7 @@ import Particles from "@/components/ui/particles";
 export default function Home() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [company, setCompany] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,6 +19,10 @@ export default function Home() {
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
+  };
+
+  const handleCompanyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCompany(event.target.value);
   };
 
   const isValidEmail = (email: string) => {
@@ -47,7 +52,7 @@ export default function Home() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ firstname: name, email }),
+          body: JSON.stringify({ firstname: name, email, company }),
         });
 
         if (!mailResponse.ok) {
@@ -70,6 +75,7 @@ export default function Home() {
       success: () => {
         setName("");
         setEmail("");
+        setCompany("");
         return "Thank you for joining the waitlist 🎉";
       },
       error: (error) => {
@@ -99,6 +105,8 @@ export default function Home() {
         <Form
           name={name}
           email={email}
+          company={company}
+          handleCompanyChange={handleCompanyChange}
           handleNameChange={handleNameChange}
           handleEmailChange={handleEmailChange}
           handleSubmit={handleSubmit}
