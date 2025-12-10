@@ -3,10 +3,13 @@ import {
   Container,
   Head,
   Hr,
+  Row,
+  Column,
   Html,
-  Img,
+  Link,
   Preview,
   Text,
+  Img,
 } from "@react-email/components";
 import * as React from "react";
 
@@ -14,104 +17,183 @@ interface EmailProps {
   userFirstname: string;
 }
 
-export const BackroomWaitlistEmail = ({ userFirstname }: EmailProps) => (
-  <Html>
-    <Head />
-    <Preview>Thanks for Joining the Waitlist, {userFirstname}! 🎉</Preview>
-    <Body style={main}>
-      <Container style={container}>
-        <Img
-          src={`https://spinedao.com`}
-          width="220"
-          height="100"
-          alt="SpineDAO Logo"
-          style={logo}
-        />
-        <Text style={greeting}>Hi {userFirstname},</Text>
-        <Text style={paragraph}>
-          Thanks for joining the waitlist for our Next.js + Notion CMS waitlist
-          template! I'm Lakshay, the developer behind this project. I'm glad to
-          have you on board.
-        </Text>
-        <Text style={paragraph}>
-          I'll keep you posted on the progress and notify you as soon as it's
-          ready for you to use. In the meantime, if you have any questions or
-          feedback, don't hesitate to reach out by replying directly to{" "}
-          <a href="mailto:people@spinedao.com" style={link}>
-            this email {""}
-          </a>
-          — I'm here to listen!
-        </Text>
-        <Text style={signOff}>
-          Best regards,
-          <br />
-          SpineDAO Team
-        </Text>
-        <Hr style={hr} />
-        <Text style={footer}>
-          You received this email because you signed up for the SpineDAO R&D
-          Backroom.
-        </Text>
-      </Container>
-    </Body>
-  </Html>
-);
+export default function BackroomWaitlistEmail({ userFirstname }: EmailProps) {
+  return (
+    <Html>
+      <Head />
+      <Preview>
+        Thanks for joining SpineDAO’s Backroom waitlist, {userFirstname}!
+      </Preview>
+      <Body style={main}>
+        <Container style={container}>
+          <Img
+            src={`https://cdn.prod.website-files.com/67c18f24d3391af167d9fae7/67c1b4cebeaac11b2a9a8a96_Spinedao-Logo.svg`}
+            width="220"
+            height="100"
+            alt="SpineDAO Logo"
+            style={{
+              marginLeft: "auto",
+              marginRight: "auto",
+              paddingRight: 30,
+            }}
+          />
 
-BackroomWaitlistEmail.PreviewProps = {
-  userFirstname: "Tyler",
-} as EmailProps;
+          <Text style={greeting}>Hi {userFirstname},</Text>
 
-export default BackroomWaitlistEmail;
+          <Text style={paragraph}>
+            Thanks for joining the SpineDAO R&D Backroom waitlist. We’re a
+            global network of medical practitioners, researchers, patients, and
+            innovators accelerating spine health from diagnosis to recovery with
+            decentralized and AI-powered solutions.
+          </Text>
+
+          <Text style={paragraph}>
+            As a Backroom waitlist member, you’ll get early updates on our
+            trusted and advanced AI suite for spine wellness and care — from
+            wellness awareness and patient triage to predictive tools for
+            imaging and surgery. You’ll also get previews of products in
+            development like:
+          </Text>
+
+          <Text style={paragraph}>
+            • Vertebra-1T (AI analysis of X-rays, MRIs, and CT scans via
+            Radiomics)
+            <br />
+            • Vertebra-4W (Lamina — an AI-powered spine-care wellness companion)
+            <br />• AI patient triage (data-informed case prioritization and
+            treatment pathways)
+          </Text>
+
+          <Text style={paragraph}>
+            We believe in open data sharing and open-source publishing to
+            accelerate research while maintaining patient privacy and security.
+            If you’re curious, you can explore more about our vision, projects,
+            and the SPINE token below.
+          </Text>
+
+          <Row>
+            <Column style={{ padding: "8px" }}>
+              <Link href="https://spinedao.com" style={button}>
+                Visit SpineDAO
+              </Link>
+            </Column>
+            <Column style={{ padding: "8px" }}>
+              <Link
+                href="https://spinedao.com/projects"
+                style={secondaryButton}>
+                See all Projects
+              </Link>
+            </Column>
+            <Column style={{ padding: "8px" }}>
+              <Link href="https://spinedao.com/spine-token" style={button}>
+                Spine Tokenomics
+              </Link>
+            </Column>
+            <Column style={{ padding: "8px" }}>
+              <Link
+                href="https://spinedao.com/spine-archive"
+                style={secondaryButton}>
+                Spine Archive
+              </Link>
+            </Column>
+          </Row>
+          <Text style={paragraph}>
+            Have questions or feedback? Reply directly to{" "}
+            <Link href="mailto:people@spinedao.com" style={linkStyle}>
+              people@spinedao.com
+            </Link>{" "}
+            — we’re here to listen.
+          </Text>
+
+          <Text style={signOff}>
+            Best regards, <br /> SpineDAO Team
+          </Text>
+
+          <Hr style={hr} />
+
+          <Text style={footer}>
+            You received this email because you signed up for the SpineDAO R&D
+            Backroom waitlist. If this wasn’t you, please ignore this message or
+            contact{" "}
+            <Link href="mailto:people@spinedao.com" style={linkStyle}>
+              people@spinedao.com
+            </Link>
+            .
+          </Text>
+        </Container>
+      </Body>
+    </Html>
+  );
+}
 
 const main = {
-  background: "linear-gradient(-225deg, #FFE29F 0%, #FFA99F 48%, #FF719A 100%)",
-  fontFamily: 'figtree, "Helvetica Neue", Helvetica, Arial, sans-serif',
-  padding: "40px 0",
-  color: "#cccccc",
+  backgroundColor: "#ffffff",
+  fontFamily:
+    '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif',
+  color: "#0a0a0a",
+  margin: "0",
+  marginTop: 20,
+  marginBottom: 20,
+  padding: "0",
 };
 
 const container = {
   margin: "0 auto",
-  padding: "24px 32px 48px",
-  backgroundColor: "#1a1a1a",
+  padding: "24px 24px",
+  maxWidth: "560px",
+  border: "1px solid #eaeaea",
   borderRadius: "12px",
-  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-  maxWidth: "600px",
-};
-
-const logo = {
-  margin: "0 auto",
-  paddingBottom: "20px",
+  backgroundColor: "#ffffff",
 };
 
 const greeting = {
-  fontSize: "18px",
-  lineHeight: "28px",
+  fontSize: "16px",
+  lineHeight: "1.5",
+  margin: "0px 0 8px",
 };
 
 const paragraph = {
-  fontSize: "16px",
-  lineHeight: "26px",
-  marginBottom: "20px",
+  fontSize: "14px",
+  lineHeight: "1.6",
+  margin: "12px 0",
+  color: "#333333",
 };
 
-const link = {
-  color: "#F7FF9B",
+const linkStyle = {
+  color: "#1363DF",
   textDecoration: "underline",
 };
 
-const signOff = {
-  fontSize: "16px",
-  lineHeight: "26px",
-  marginTop: "20px",
+const button = {
+  display: "inline-block",
+  padding: "10px 14px",
+  borderRadius: "8px",
+  backgroundColor: "#A70D53",
+  color: "#ffffff",
+  fontSize: "14px",
+  textDecoration: "none",
+};
+
+const secondaryButton = {
+  ...button,
+  backgroundColor: "#2F5E6E",
 };
 
 const hr = {
-  borderColor: "#cccccc",
-  margin: "20px 0",
+  borderColor: "#eaeaea",
+  margin: "24px 0",
+};
+
+const signOff = {
+  fontSize: "14px",
+  lineHeight: "1.6",
+  margin: "16px 0",
+  color: "#333333",
 };
 
 const footer = {
-  color: "#8c8c8c",
   fontSize: "12px",
+  lineHeight: "1.6",
+  color: "#666666",
+  margin: "0",
 };

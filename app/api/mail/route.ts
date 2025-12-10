@@ -28,26 +28,24 @@ export async function POST(request: NextRequest) {
 
   const { email, firstname } = await request.json();
 
-  await resend.contacts.create({
+  const { data: contact, error: contactErr } = await resend.contacts.create({
     audienceId: process.env.RESEND_AUDIENCE_ID!,
     email: email,
     firstName: firstname,
   });
+  if (contactErr || !contact) {
+    return NextResponse.json(contactErr || { message: "Failed to send email" });
+  }
 
-  const { data, error } = await resend.emails.send({
-    from: "SpineDAO <hello@waitlist.spinedao.com>",
+  let { data, error } = await resend.emails.send({
+    from: `${process.env.RESEND_EMAIL_NAME} <${process.env.RESEND_EMAIL}>`,
     to: [email],
     subject: "Thank you for joining the R&D backroom",
     reply_to: "people@spinedao.com",
     html: await render(WelcomeTemplate({ userFirstname: firstname })),
   });
-
-  if (error) {
-    return NextResponse.json(error);
-  }
-
-  if (!data) {
-    return NextResponse.json({ message: "Failed to send email" });
+  if (error || !data) {
+    return NextResponse.json(error || { message: "Failed to send email" });
   }
 
   return NextResponse.json({ message: "Email sent successfully" });
