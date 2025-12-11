@@ -73,7 +73,10 @@ export default function BackroomWaitlistEmail({ userFirstname }: EmailProps) {
             and the SPINE token below.
           </Text>
 
-          <Row>
+          <Row
+            style={{
+              maxWidth: 300,
+            }}>
             <Column style={{ padding: "8px" }}>
               <Link href="https://spinedao.com" style={button}>
                 Visit SpineDAO
@@ -86,6 +89,8 @@ export default function BackroomWaitlistEmail({ userFirstname }: EmailProps) {
                 See all Projects
               </Link>
             </Column>
+          </Row>
+          <Row style={{ maxWidth: 300 }}>
             <Column style={{ padding: "8px" }}>
               <Link href="https://spinedao.com/spine-token" style={button}>
                 Spine Tokenomics
